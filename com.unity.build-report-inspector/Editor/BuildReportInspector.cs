@@ -458,11 +458,12 @@ namespace Unity.BuildReportInspector
             public Texture icon;
         }
 
-        private static void ShowAssets(IEnumerable<AssetEntry> assets, ref float vPos, string fileFilter = null, string typeFilter = null)
+        private static void ShowAssets(IEnumerable<AssetEntry> assets, ref float vPos, string fileFilter = null, string typeFilter = null, int fileCounter = 50)
         {
+            GUILayout.Label("Showed first " + 50 + " AssetEntry");
             GUILayout.BeginVertical();
             var odd = false;
-            foreach (var entry in assets.Where(entry => fileFilter == null || fileFilter == entry.outputFile).Where(entry => typeFilter == null || typeFilter == entry.type))
+            foreach (var entry in assets.Where(entry => fileFilter == null || fileFilter == entry.outputFile).Where(entry => typeFilter == null || typeFilter == entry.type).Take(fileCounter))
             {
                 GUILayout.BeginHorizontal(odd ? OddStyle : EvenStyle);
 
